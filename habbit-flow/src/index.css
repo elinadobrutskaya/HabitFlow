@@ -1,33 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
-  /* base */
-  --bg: #daf1de;
-  --text: #051f20;
+  --bg: #fdfcf9;
+  --text: #1a2c27;
 
-  /* surfaces */
-  --card: #8eb69b;
-  --border: #235347;
+  --card: #f1f4f0;
+  --border: #e2e8e3;
 
-  /* brand */
-  --primary: #0b2b26;
-  --primary-contrast: #235347;
+  --primary-bright: #db622e;
+  --primary-bright-contrast: #ffffff;
 
-  /* states */
-  --danger: #640101;
+  --primary: #23423a;
+  --primary-contrast: #c3cfc0;
 
-  /* form */
-  --input-bg: #daf1de;
-  --input-text: #051f20;
-  --input-border: #8eb68b;
+  /* States */
+  --danger: #bc4b41;
 
-  /* misc */
-  --shadow: 0 10px 30px #16383298;
+  /* Form */
+  --input-bg: #ffffff;
+  --input-text: #1a2c27;
+  --input-border: #d1d9d2;
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Misc*/
+  --shadow: 0 20px 40px rgba(26, 44, 39, 0.05);
+
+  --mask: #fdfcf985;
+  --logo: #e67e50;
+
+  font-family: 'Merriweather', 'Merriweather Sans', 'Open Sans', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -37,22 +39,28 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #051f20;
-  --text: #daf1de;
+  --bg: #121c1a;
+  --text: #e3ebe4;
 
-  --card: #163832;
-  --border: #0b2b26;
+  --card: #1a2825;
+  --border: #253632;
 
-  --primary: #8eb69b;
-  --primary-contrast: #235347;
+  --primary-bright: #f0946d;
+  --primary-bright-contrast: #121c1a;
 
-  --danger: #f5bbbb;
+  --primary: #4a7a6d;
+  --primary-contrast: #f9fdf9;
 
-  --input-bg: #163832;
-  --input-text: #daf1de;
-  --input-border: #0b2b26;
+  --danger: #e57373;
 
-  --shadow: 0 10px 30px #16383298;
+  --input-bg: #1a2825;
+  --input-text: #e3ebe4;
+  --input-border: #2f4540;
+
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  --logo: #f0946d;
+  --mask: #121c1aeb;
 }
 
 * {

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router'
 import style from './style.module.scss'
-// import Header from '../Components/Header'
+import Header from '../Components/Header'
 
 interface Props {
   children: React.ReactNode
@@ -12,7 +12,7 @@ const Loyout = ({ children }: Props) => {
   console.log(location)
   return (
     <div className={style.layout}>
-      {/* <Header /> */}
+      <Header />
       <div className={style.content}>{children}</div>
     </div>
   )
