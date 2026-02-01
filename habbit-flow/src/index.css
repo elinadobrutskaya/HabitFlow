@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  /* base */
+  --bg: #daf1de;
+  --text: #051f20;
+
+  /* surfaces */
+  --card: #8eb69b;
+  --border: #235347;
+
+  /* brand */
+  --primary: #0b2b26;
+  --primary-contrast: #235347;
+
+  /* states */
+  --danger: #640101;
+
+  /* form */
+  --input-bg: #daf1de;
+  --input-text: #051f20;
+  --input-border: #8eb68b;
+
+  /* misc */
+  --shadow: 0 10px 30px #16383298;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color: var(--text);
+}
+
+:root[data-theme='dark'] {
+  --bg: #051f20;
+  --text: #daf1de;
+
+  --card: #163832;
+  --border: #0b2b26;
+
+  --primary: #8eb69b;
+  --primary-contrast: #235347;
+
+  --danger: #f5bbbb;
+
+  --input-bg: #163832;
+  --input-text: #daf1de;
+  --input-border: #0b2b26;
+
+  --shadow: 0 10px 30px #16383298;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 0px 10px;
+}

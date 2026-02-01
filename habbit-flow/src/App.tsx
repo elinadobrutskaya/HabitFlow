@@ -1,12 +1,21 @@
+import { Routes } from 'react-router'
+import { Route } from 'react-router'
+import { appRoutes } from './routes'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Loyout from './Layout'
+import MainPage from './Pages/MainPage'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return <></>
+  return (
+    <>
+      <Loyout>
+        <Routes>
+          <Route index element={<MainPage />}></Route>
+          <Route path={appRoutes.main()}></Route>
+        </Routes>
+      </Loyout>
+    </>
+  )
 }
 
 export default App
