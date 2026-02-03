@@ -1,0 +1,57 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+
+  &::placeholder {
+    color: color-mix(in srgb, var(--text) 50%, transparent);
+  }
+
+  &:hover {
+    border-color: var(--border);
+  }
+
+  &:focus {
+    border-color: var (--primary);
+  }
+}
+
+.inputError {
+  border-color: var(--danger);
+}
+
+.disabled {
+  background-color: var(--card);
+  color: color-mix(in srgb, var(--text) 50%, transparent);
+
+  &::placeholder {
+    color: color-mix(in srgb, var(--text) 50%, transparent);
+  }
+}
+
+.errorText {
+  font-size: 12px;
+  color: var(--danger);
+}
