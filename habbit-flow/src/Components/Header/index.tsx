@@ -8,12 +8,16 @@ const Header = () => {
     <header className={style.header}>
       <div className={style.leftPart}>
         <Link to="/">
-          <span className={style.logo}>HabbitFlow</span>
+          <span className={style.logo}>HabitFlow</span>
         </Link>
       </div>
       <div className={style.rightPart}>
-        <Button variant="secondary">Sign UP</Button>
-        <Button variant="secondary">Sign IN</Button>
+        <Link to="habitflow/sign-up">
+          <Button variant="secondary">Sign UP</Button>
+        </Link>
+        <Link to="habitflow/sign-in">
+          <Button variant="secondary">Sign IN</Button>
+        </Link>
         <ThemeToggle />
       </div>
     </header>

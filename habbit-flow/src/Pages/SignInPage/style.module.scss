@@ -1,0 +1,34 @@
+.signInPage {
+  background-color: var(--bg);
+  padding: 5vh;
+}
+
+.windowSignForm {
+  width: 100%;
+  // min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg);
+}
+
+.topPart {
+  width: 100%;
+  max-width: 1170px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
