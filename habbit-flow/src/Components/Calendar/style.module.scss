@@ -1,50 +1,111 @@
-:global {
-  .react-calendar {
-    border: none;
-    background: transparent;
-    width: 100% !important;
+.calendar {
+  font-family: 'Merriweather', 'Merriweather Sans', 'Open Sans', sans-serif;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 2000px;
+  width: 85%;
+  margin: 40px auto;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  overflow: hidden;
+}
 
-    // Скрываем навигацию (месяц/год), если хочешь только ленту дней
-    &__navigation {
-      display: none;
-    }
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 0 10px 0 0;
 
-    // Скрываем названия дней недели (Пн, Вт...), если они не нужны сверху
-    &__month-view__weekdays {
-      display: none;
-    }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
 
-    // Главный контейнер дней
-    &__month-view__days {
-      display: flex !important; // Меняем сетку на флекс
-      flex-wrap: nowrap !important; // Запрещаем перенос строк
-      overflow-x: auto; // Разрешаем скролл вправо
-      padding: 10px 0;
-      scrollbar-width: none; // Скрываем скроллбар в Firefox
+.buttonChangeMonth {
+  background-color: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: 'Merriweather Sans';
+  color: var(--text);
+  font-size: 1.2rem;
+  transition: background-color 0.2s;
 
-      &::-webkit-scrollbar {
-        display: none; // Скрываем скроллбар в Chrome/Safari
-      }
-    }
+  &:hover {
+    background-color: var(--border);
+  }
+}
 
-    // Стилизуем каждую ячейку (дату) как вертикальный столбик
-    &__tile {
-      flex: 0 0 60px; // Фиксированная ширина каждого дня
-      height: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0 5px;
-      border-radius: 15px !important;
-      background: var(--card);
-      border: 1px solid var(--border);
+.daysRowContainer {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  gap: 20px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-      // Число внутри ячейки
-      abbr {
-        font-size: 1.2rem;
-        font-weight: 700;
-      }
-    }
+.dayCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 70px;
+  flex-shrink: 0;
+  padding: 10px 0;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover:not(.activeDay) {
+    background-color: var(--bg);
+  }
+}
+
+.dayOfWeek {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--primary); /* Темно-зеленый */
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.dayOfMonth {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.today {
+  background-color: var(--primary-contrast);
+}
+
+.activeDay {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+
+  .dayOfWeek,
+  .dayOfMonth {
+    color: inherit;
   }
 }

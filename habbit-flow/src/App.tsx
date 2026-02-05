@@ -5,6 +5,7 @@ import Loyout from './Layout'
 import MainPage from './Pages/MainPage'
 import SignIn from './Pages/SignInPage'
 import SignUp from './Pages/SignUpPage'
+import Calendar from './Components/Calendar'
 
 function App() {
   return (
@@ -15,10 +16,10 @@ function App() {
           <Route path={appRoutes.main()}></Route>
           <Route path={appRoutes.signIn()} element={<SignIn></SignIn>}></Route>
           <Route path={appRoutes.signUp()} element={<SignUp></SignUp>}></Route>
-          {/* <Route
+          <Route
             path={appRoutes.calendar()}
-            element={<MyHabitCalendar></MyHabitCalendar>}
-          ></Route> */}
+            element={<Calendar initialDate={'01.02.2026'}></Calendar>}
+          ></Route>
         </Routes>
       </Loyout>
     </>
