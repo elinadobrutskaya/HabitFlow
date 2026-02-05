@@ -15,6 +15,10 @@ function App() {
           <Route path={appRoutes.main()}></Route>
           <Route path={appRoutes.signIn()} element={<SignIn></SignIn>}></Route>
           <Route path={appRoutes.signUp()} element={<SignUp></SignUp>}></Route>
+          {/* <Route
+            path={appRoutes.calendar()}
+            element={<MyHabitCalendar></MyHabitCalendar>}
+          ></Route> */}
         </Routes>
       </Loyout>
     </>

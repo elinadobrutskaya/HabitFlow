@@ -1,0 +1,50 @@
+:global {
+  .react-calendar {
+    border: none;
+    background: transparent;
+    width: 100% !important;
+
+    // Скрываем навигацию (месяц/год), если хочешь только ленту дней
+    &__navigation {
+      display: none;
+    }
+
+    // Скрываем названия дней недели (Пн, Вт...), если они не нужны сверху
+    &__month-view__weekdays {
+      display: none;
+    }
+
+    // Главный контейнер дней
+    &__month-view__days {
+      display: flex !important; // Меняем сетку на флекс
+      flex-wrap: nowrap !important; // Запрещаем перенос строк
+      overflow-x: auto; // Разрешаем скролл вправо
+      padding: 10px 0;
+      scrollbar-width: none; // Скрываем скроллбар в Firefox
+
+      &::-webkit-scrollbar {
+        display: none; // Скрываем скроллбар в Chrome/Safari
+      }
+    }
+
+    // Стилизуем каждую ячейку (дату) как вертикальный столбик
+    &__tile {
+      flex: 0 0 60px; // Фиксированная ширина каждого дня
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      border-radius: 15px !important;
+      background: var(--card);
+      border: 1px solid var(--border);
+
+      // Число внутри ячейки
+      abbr {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+    }
+  }
+}
