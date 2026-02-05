@@ -34,28 +34,30 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
   const goToPrevMonth = () => setCurrentDate(currentDate.subtract(1, 'month'))
 
   return (
-    <div className={style.calendar}>
-      <div className={style.calendarHeader}>
-        <button className={style.buttonChangeMonth} onClick={goToPrevMonth}>
-          {'<'}
-        </button>
+    <div className={style.calendarContainer}>
+      <div className={style.calendar}>
+        <div className={style.calendarHeader}>
+          <button className={style.buttonChangeMonth} onClick={goToPrevMonth}>
+            {'<'}
+          </button>
 
-        <h2>{currentDate.format('MMMM YYYY')}</h2>
-        <button className={style.buttonChangeMonth} onClick={goToNextMonth}>
-          {'>'}
-        </button>
-      </div>
+          <h2>{currentDate.format('MMMM YYYY')}</h2>
+          <button className={style.buttonChangeMonth} onClick={goToNextMonth}>
+            {'>'}
+          </button>
+        </div>
 
-      <div className={style.daysRowContainer}>
-        {currentMonthDays.map((dayObj: DayObject) => (
-          <div
-            key={dayObj.date.toISOString()}
-            className={`dayCell ${dayObj.isToday ? 'today' : ''}`}
-          >
-            <div className={style.dayOfWeek}>{dayObj.date.format('ddd')}</div>
-            <div className={style.dayOfMonth}>{dayObj.date.format('D')}</div>
-          </div>
-        ))}
+        <div className={style.daysRowContainer}>
+          {currentMonthDays.map((dayObj: DayObject) => (
+            <div
+              key={dayObj.date.toISOString()}
+              className={`${style.dayCell} ${dayObj.isToday ? style.today : ''}`}
+            >
+              <div className={style.dayOfWeek}>{dayObj.date.format('ddd')}</div>
+              <div className={style.dayOfMonth}>{dayObj.date.format('D')}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

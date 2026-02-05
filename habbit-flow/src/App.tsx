@@ -6,8 +6,10 @@ import MainPage from './Pages/MainPage'
 import SignIn from './Pages/SignInPage'
 import SignUp from './Pages/SignUpPage'
 import Calendar from './Components/Calendar'
+import dayjs from 'dayjs'
 
 function App() {
+  const today = dayjs().format('MM.DD.YYYY')
   return (
     <>
       <Loyout>
@@ -18,7 +20,7 @@ function App() {
           <Route path={appRoutes.signUp()} element={<SignUp></SignUp>}></Route>
           <Route
             path={appRoutes.calendar()}
-            element={<Calendar initialDate={'01.02.2026'}></Calendar>}
+            element={<Calendar initialDate={today}></Calendar>}
           ></Route>
         </Routes>
       </Loyout>

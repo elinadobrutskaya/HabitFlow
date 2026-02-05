@@ -2,6 +2,7 @@ import style from './style.module.scss'
 import { Container } from '@mui/material'
 import Title from '../../Components/Title'
 import Button from '../../Components/Button'
+import { Link } from 'react-router'
 
 export default function MainPage() {
   return (
@@ -15,7 +16,9 @@ export default function MainPage() {
             for busy people.
           </p>
         </div>
-        <Button>Get Started Now</Button>
+        <Link to="habitflow/calendar">
+          <Button>Get Started Now</Button>
+        </Link>
       </div>
     </section>
   )

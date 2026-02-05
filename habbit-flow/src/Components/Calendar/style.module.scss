@@ -1,23 +1,32 @@
-.calendar {
+.calendarContainer {
   font-family: 'Merriweather', 'Merriweather Sans', 'Open Sans', sans-serif;
   background-color: var(--card);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 20px;
   max-width: 2000px;
-  width: 85%;
+  width: 99%;
   margin: 40px auto;
+  display: flex;
+  justify-content: flex-end;
   box-shadow: var(--shadow);
   color: var(--text);
   overflow: hidden;
 }
 
+.calendar {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
 .calendarHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   margin-bottom: 15px;
   padding: 0 10px 0 0;
+  gap: 80px;
 
   h2 {
     font-size: 1.5rem;
@@ -48,11 +57,10 @@
 
 .daysRowContainer {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   overflow-x: auto;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  gap: 20px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -65,13 +73,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 70px;
+  width: 35px;
+  // height: 45px;
   flex-shrink: 0;
-  padding: 10px 0;
   border-right: 1px solid var(--border);
   cursor: pointer;
   transition: background-color 0.2s;
+  text-align: center;
 
   &:last-child {
     border-right: none;
@@ -85,7 +93,7 @@
 .dayOfWeek {
   font-size: 0.6rem;
   font-weight: 600;
-  color: var(--primary); /* Темно-зеленый */
+  color: var(--primary);
   text-transform: uppercase;
   margin-bottom: 5px;
 }
