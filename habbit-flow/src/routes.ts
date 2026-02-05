@@ -6,4 +6,5 @@ export const appRoutes = {
     `habitflow/articles/${articleId}/not-found`,
   signUp: () => 'habitflow/sign-up',
   signIn: () => 'habitflow/sign-in',
+  calendar: () => 'habitflow/calendar',
 }

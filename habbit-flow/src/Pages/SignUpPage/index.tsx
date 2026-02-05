@@ -8,7 +8,7 @@ const SignUp = () => {
       <div className={style.container}>
         <div className={style.windowSignForm}>
           <div className={style.topPart}>
-            <Title>Sign In</Title>
+            <Title>Sign Up</Title>
           </div>
           <div className={style.signUp}>
             <SignUpForm />
