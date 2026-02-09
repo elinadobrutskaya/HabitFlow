@@ -6,7 +6,6 @@ interface ButtonProps {
   children?: React.ReactNode
   variant?: 'primary' | 'secondary' | 'error' | 'theme'
   disabled?: boolean
-
   isLoading?: boolean
   type?: 'button' | 'submit' | 'reset'
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
