@@ -200,6 +200,10 @@
   &:last-child {
     border-right: none;
   }
+  &.disabled {
+    background-color: #f0f0f0;
+    opacity: 0.5;
+  }
 }
 
 .checked {

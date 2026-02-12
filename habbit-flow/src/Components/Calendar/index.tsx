@@ -2,8 +2,10 @@ import React, { useState, useMemo, useEffect } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import style from './style.module.scss'
 import { useAppDispatch, useAppSelector } from '../../App/store'
-import { fetchHabits, addHabit, toggleHabitDate } from '../../App/habitSlice'
+import { fetchHabits, toggleHabitDate } from '../../App/habitSlice'
 import type { Habit } from '../../App/habitSlice'
+import Title from '../Title'
+import HabitsTool from '../HabitsTool'
 
 interface CalendarProps {
   initialDate: string | Dayjs
@@ -17,6 +19,7 @@ interface DayObject {
 const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
   const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs(initialDate))
   const dispatch = useAppDispatch()
+
   const habits = useAppSelector((state) => state.habits.items)
 
   useEffect(() => {
@@ -40,12 +43,10 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
   }, [currentDate])
 
   const handleToggle = (habit: Habit, dateStr: string) => {
+    if (dayjs(dateStr).isAfter(dayjs(), 'day')) {
+      return
+    }
     dispatch(toggleHabitDate({ habit, date: dateStr }))
-  }
-
-  const handleCreate = () => {
-    const title = prompt('Enter habit title:')
-    if (title?.trim()) dispatch(addHabit(title.trim()))
   }
 
   const goToNextMonth = () => setCurrentDate(currentDate.add(1, 'month'))
@@ -55,22 +56,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
     <div className={style.calendarContainer}>
       <div className={style.layout}>
         {/* left */}
-        <div className={style.leftColumn}>
-          <button className={style.buttonHabitList}>
-            All Habits<span>⌵</span>
-          </button>
-
-          <button className={style.buttonAddHabit} onClick={handleCreate}>
-            + Add New Habit
-          </button>
-
-          {habits.map((habit) => (
-            <div key={habit.id} className={style.habitTitle}>
-              {habit.title}
-            </div>
-          ))}
-        </div>
-
+        <HabitsTool></HabitsTool>
         {/* right */}
         <div className={style.rightColumn}>
           {/* header */}
@@ -79,7 +65,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
               {'<'}
             </button>
 
-            <h2>{currentDate.format('MMMM YYYY')}</h2>
+            <Title>{currentDate.format('MMMM YYYY')}</Title>
 
             <button className={style.buttonChangeMonth} onClick={goToNextMonth}>
               {'>'}
@@ -109,14 +95,15 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
               {currentMonthDays.map((dayObj) => {
                 const dateStr = dayObj.date.format('YYYY-MM-DD')
                 const isCompleted = habit.completedDates.includes(dateStr)
+                const isFuture = dayObj.date.isAfter(dayjs(), 'day')
 
                 return (
                   <div
                     key={dateStr}
-                    className={`${style.checkCell} ${
-                      isCompleted ? style.checked : ''
-                    }`}
-                    onClick={() => handleToggle(habit, dateStr)}
+                    className={`${style.checkCell} 
+                      ${isCompleted ? style.checked : ''} 
+                      ${isFuture ? style.disabled : ''}`}
+                    onClick={() => !isFuture && handleToggle(habit, dateStr)}
                   />
                 )
               })}
