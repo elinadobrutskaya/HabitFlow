@@ -54,7 +54,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
   return (
     <div className={style.calendarContainer}>
       <div className={style.layout}>
-        {/* LEFT COLUMN */}
+        {/* left */}
         <div className={style.leftColumn}>
           <button className={style.buttonHabitList}>
             All Habits<span>⌵</span>
@@ -71,9 +71,9 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
           ))}
         </div>
 
-        {/* RIGHT COLUMN */}
+        {/* right */}
         <div className={style.rightColumn}>
-          {/* HEADER */}
+          {/* header */}
           <div className={style.calendarHeader}>
             <button className={style.buttonChangeMonth} onClick={goToPrevMonth}>
               {'<'}
@@ -86,7 +86,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
             </button>
           </div>
 
-          {/* DAYS */}
+          {/* days */}
           <div className={style.daysRowContainer}>
             {currentMonthDays.map((dayObj) => (
               <div
@@ -103,7 +103,7 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
             ))}
           </div>
 
-          {/* CELLS */}
+          {/* cellsW */}
           {habits.map((habit) => (
             <div key={habit.id} className={style.cellsContainer}>
               {currentMonthDays.map((dayObj) => {

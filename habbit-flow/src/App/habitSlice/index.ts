@@ -68,11 +68,7 @@ const habitsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchHabits.pending, (state) => {
-        state.loading = true
-      })
       .addCase(fetchHabits.fulfilled, (state, action) => {
-        state.loading = false
         state.items = action.payload
       })
       .addCase(addHabit.fulfilled, (state, action) => {
@@ -86,6 +82,7 @@ const habitsSlice = createSlice({
       })
       .addCase(addHabit.rejected, (state, action) => {
         state.error = action.error.message ?? 'Add failed'
+        console.error(action.error)
       })
   },
 })
