@@ -2,18 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import TextField from '../TextField'
 import style from './style.module.scss'
 
-const validateForm = (): {
-  hasError: boolean
-  field: 'login' | 'password'
-  error: string
-} => {
-  return {
-    hasError: true,
-    field: 'login',
-    error: 'login is incorrect',
-  }
-}
-
 const SignInForm = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [data, setData] = useState({ login: '', password: '' })
@@ -30,21 +18,28 @@ const SignInForm = () => {
     }
   }, [errors])
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
-    const { hasError, field, error } = validateForm()
+    try {
+      const response = await fetch(
+        `https://YOUR_PROJECT_ID.mockapi.io/users?login=${data.login}`,
+      )
+      const users = await response.json()
 
-    if (hasError) {
-      setErrors(() => ({
-        login: '',
-        password: '',
-        [field]: error || 'Invalid JSON',
-      }))
-      return
+      const user = users.find(
+        (u: any) => u.login === data.login && u.password === data.password,
+      )
+
+      if (user) {
+        alert(`Добро пожаловать, ${user.login}!`)
+        localStorage.setItem('user', JSON.stringify(user))
+      } else {
+        setErrors({ login: 'Wrong login or password' })
+      }
+    } catch (error) {
+      console.error('Enter Error', error)
     }
-
-    alert(`Login: ${data.login} Password: ${data.password}`)
   }
 
   const onChangeField = (field: string, value: string) => {
@@ -74,9 +69,6 @@ const SignInForm = () => {
           Submit
         </button>
       </form>
-
-      <div>Login: {data.login}</div>
-      <div>Password: {data.password}</div>
     </div>
   )
 }

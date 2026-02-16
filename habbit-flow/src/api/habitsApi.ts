@@ -1,4 +1,5 @@
-const BASE_URL = 'https://6988664c780e8375a68835d8.mockapi.io/habitflow/habits'
+const BASE_URL =
+  'https://6988664c780e8375a68835d8.mockapi.io/habitflow/users/1/habits'
 
 export const habitsApi = {
   getHabits: () => fetch(BASE_URL).then((res) => res.json()),

@@ -20,7 +20,8 @@ const initialState: HabitsState = {
   error: null,
 }
 
-const BASE_URL = 'https://6988664c780e8375a68835d8.mockapi.io/habitflow/habits'
+const BASE_URL =
+  'https://6988664c780e8375a68835d8.mockapi.io/habitflow/users/1/habits'
 
 // getting all habbits
 export const fetchHabits = createAsyncThunk('habits/fetchAll', async () => {

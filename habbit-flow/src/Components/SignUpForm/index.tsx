@@ -3,18 +3,6 @@ import TextField from '../TextField'
 import style from './style.module.scss'
 import { Link } from 'react-router'
 
-const validateForm = (): {
-  hasError: boolean
-  field: 'login' | 'email' | 'password'
-  error: string
-} => {
-  return {
-    hasError: true,
-    field: 'login',
-    error: 'login is incorrect',
-  }
-}
-
 const SignUpForm = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [data, setData] = useState({ login: '', email: '', password: '' })
@@ -32,24 +20,30 @@ const SignUpForm = () => {
     }
   }, [errors])
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
 
-    const { hasError, field, error } = validateForm()
-
-    if (hasError) {
-      setErrors(() => ({
-        login: '',
-        email: '',
-        password: '',
-        [field]: error || 'Invalid JSON',
-      }))
+    if (!data.login || !data.email || !data.password) {
+      setErrors({ login: !data.login ? 'Обязательное поле' : '' })
       return
     }
 
-    alert(
-      `Login: ${data.login} Email: ${data.email} Password: ${data.password}`,
-    )
+    try {
+      const response = await fetch(
+        'https://6988664c780e8375a68835d8.mockapi.io/habitflow/users',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        },
+      )
+
+      if (response.ok) {
+        alert('Registration Success!')
+      }
+    } catch (error) {
+      console.error('Registration Error: ', error)
+    }
   }
 
   const onChangeField = (field: string, value: string) => {
@@ -89,10 +83,6 @@ const SignUpForm = () => {
           <Link to="/habitflow/sign-in">Sign In!</Link>
         </span>
       </form>
-
-      <div>Login: {data.login}</div>
-      <div>Email: {data.email}</div>
-      <div>Password: {data.password}</div>
     </div>
   )
 }
