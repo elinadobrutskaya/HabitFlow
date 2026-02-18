@@ -4,7 +4,7 @@ import style from './style.module.scss'
 
 interface ButtonProps {
   children?: React.ReactNode
-  variant?: 'primary' | 'secondary' | 'error' | 'theme'
+  variant?: 'primary' | 'secondary' | 'cancel' | 'theme'
   disabled?: boolean
   isLoading?: boolean
   type?: 'button' | 'submit' | 'reset'

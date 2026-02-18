@@ -63,3 +63,41 @@
   padding-left: 10px;
   height: 40px;
 }
+
+.habitItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.2s;
+
+  &:hover {
+    background: var(--primary-contrast);
+    .deleteBtn {
+      opacity: 1;
+    }
+  }
+}
+
+.habitInfo {
+  display: flex;
+  align-items: center;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #ff4d4f;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.1s;
+  padding: 4px;
+
+  &:hover {
+    transform: scale(1.1);
+    color: #cf1322;
+  }
+}

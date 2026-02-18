@@ -23,7 +23,7 @@ const SignInForm = () => {
 
     try {
       const response = await fetch(
-        `https://YOUR_PROJECT_ID.mockapi.io/users?login=${data.login}`,
+        `https://6988664c780e8375a68835d8.mockapi.io/users?login=${data.login}`,
       )
       const users = await response.json()
 
@@ -32,7 +32,7 @@ const SignInForm = () => {
       )
 
       if (user) {
-        alert(`Добро пожаловать, ${user.login}!`)
+        alert(`Hello, ${user.login}!`)
         localStorage.setItem('user', JSON.stringify(user))
       } else {
         setErrors({ login: 'Wrong login or password' })

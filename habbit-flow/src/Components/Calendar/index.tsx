@@ -90,25 +90,34 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
           </div>
 
           {/* cellsW */}
-          {habits.map((habit) => (
-            <div key={habit.id} className={style.cellsContainer}>
-              {currentMonthDays.map((dayObj) => {
-                const dateStr = dayObj.date.format('YYYY-MM-DD')
-                const isCompleted = habit.completedDates.includes(dateStr)
-                const isFuture = dayObj.date.isAfter(dayjs(), 'day')
+          {Array.isArray(habits) &&
+            habits.map((habit) => (
+              <div key={habit.id} className={style.cellsContainer}>
+                {currentMonthDays.map((dayObj) => {
+                  const dateStr = dayObj.date.format('YYYY-MM-DD')
+                  const isCompleted =
+                    habit.completedDates?.includes(dateStr) ?? false
 
-                return (
-                  <div
-                    key={dateStr}
-                    className={`${style.checkCell} 
-                      ${isCompleted ? style.checked : ''} 
-                      ${isFuture ? style.disabled : ''}`}
-                    onClick={() => !isFuture && handleToggle(habit, dateStr)}
-                  />
-                )
-              })}
-            </div>
-          ))}
+                  const isFuture = dayObj.date.isAfter(dayjs(), 'day')
+
+                  return (
+                    <div
+                      key={dateStr}
+                      className={`${style.checkCell} 
+    ${isCompleted ? style.checked : ''} 
+    ${isFuture ? style.disabled : ''}`}
+                      style={{
+                        backgroundColor: isCompleted
+                          ? habit.color
+                          : 'transparent',
+                        borderColor: isCompleted ? habit.color : '',
+                      }}
+                      onClick={() => !isFuture && handleToggle(habit, dateStr)}
+                    />
+                  )
+                })}{' '}
+              </div>
+            ))}
         </div>
       </div>
     </div>

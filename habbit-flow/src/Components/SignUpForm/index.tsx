@@ -24,7 +24,7 @@ const SignUpForm = () => {
     event.preventDefault()
 
     if (!data.login || !data.email || !data.password) {
-      setErrors({ login: !data.login ? 'Обязательное поле' : '' })
+      setErrors({ login: !data.login ? 'Required field' : '' })
       return
     }
 
