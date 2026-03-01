@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import dayjs from 'dayjs'
 // import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface Habit {
@@ -8,6 +9,7 @@ export interface Habit {
   color: string
   completedDates: string[]
   createdAt: string
+  daysStreak: number
 }
 
 interface HabitsState {
@@ -59,7 +61,8 @@ export const addHabit = createAsyncThunk(
       title,
       category,
       color,
-    }: { title: string; category: string; color: string },
+      daysStreak,
+    }: { title: string; category: string; color: string; daysStreak: number },
     { rejectWithValue },
   ) => {
     const url = getUserHabitsUrl()
@@ -73,6 +76,7 @@ export const addHabit = createAsyncThunk(
           title,
           category,
           color,
+          daysStreak,
           completedDates: [],
           createdAt: new Date().toISOString(),
         }),
@@ -132,6 +136,32 @@ export const deleteHabit = createAsyncThunk(
     }
   },
 )
+
+//count days streak
+export const calculateCurrentStreak = (completedDates: string[]): number => {
+  if (!completedDates || completedDates.length === 0) return 0
+
+  const sortedDates = [...completedDates].sort((a, b) =>
+    dayjs(b).diff(dayjs(a)),
+  )
+  let streak = 0
+  let checkDate = dayjs().startOf('day')
+
+  if (!completedDates.includes(checkDate.format('YYYY-MM-DD'))) {
+    checkDate = checkDate.subtract(1, 'day')
+  }
+
+  for (let i = 0; i < sortedDates.length; i++) {
+    const dateStr = checkDate.format('YYYY-MM-DD')
+    if (completedDates.includes(dateStr)) {
+      streak++
+      checkDate = checkDate.subtract(1, 'day')
+    } else {
+      break
+    }
+  }
+  return streak
+}
 
 const habitsSlice = createSlice({
   name: 'habits',

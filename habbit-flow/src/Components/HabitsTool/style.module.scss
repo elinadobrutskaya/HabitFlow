@@ -1,7 +1,20 @@
 .leftColumn {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+}
+
+.controls {
+  height: 106px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.allHabitsWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 //BUTTONS
@@ -56,22 +69,27 @@
   }
 }
 
+.habitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .habitTitle {
   display: flex;
   align-items: center;
   font-weight: 600;
   padding-left: 10px;
-  height: 40px;
+  min-height: 35px;
 }
 
 .habitItem {
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // padding: 8px 12px;
-  border-radius: 6px;
-  transition: 0.2s;
-
+  box-sizing: border-box;
+  padding-right: 8px;
   &:hover {
     background: var(--primary-contrast);
     .deleteBtn {
@@ -86,6 +104,7 @@
 }
 
 .deleteBtn {
+  display: flex;
   background: none;
   border: none;
   color: #ff4d4f;

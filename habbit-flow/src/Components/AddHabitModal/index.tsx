@@ -6,7 +6,12 @@ import Title from '../Title'
 interface HabitModalProps {
   isOpen: boolean
   onClose: () => void
-  onCreate: (data: { title: string; category: string; color: string }) => void
+  onCreate: (data: {
+    title: string
+    category: string
+    daysStreak: number
+    color: string
+  }) => void
 }
 
 const HabitModal: React.FC<HabitModalProps> = ({
@@ -16,16 +21,23 @@ const HabitModal: React.FC<HabitModalProps> = ({
 }) => {
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('')
-  const [color, setColor] = useState('#589616')
+  const [daysStreak, setDaysStreak] = useState('')
+  const [color, setColor] = useState('#bbe68d')
 
   if (!isOpen) return null
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (title.trim()) {
-      onCreate({ title: title.trim(), category, color })
+      onCreate({
+        title: title.trim(),
+        category,
+        daysStreak: Number(daysStreak) || 0,
+        color,
+      })
       setTitle('')
       setCategory('')
+      setDaysStreak('')
       onClose()
     }
   }
@@ -47,6 +59,13 @@ const HabitModal: React.FC<HabitModalProps> = ({
             placeholder="Category of habit (health, education, etc.)"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+          />
+          <input
+            type="number"
+            placeholder="Days of streak"
+            value={daysStreak}
+            onChange={(e) => setDaysStreak(e.target.value)}
+            min="1"
           />
           <div className={style.colorRow}>
             <label>Color: </label>

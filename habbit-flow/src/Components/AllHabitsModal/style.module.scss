@@ -1,0 +1,20 @@
+.categoriesDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 100;
+
+  .categoryItem {
+    list-style: none;
+    padding: 8px;
+    cursor: pointer;
+    &:hover {
+      background: var(--primary-contrast);
+    }
+  }
+}

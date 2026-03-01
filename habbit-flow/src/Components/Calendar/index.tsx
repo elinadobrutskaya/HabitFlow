@@ -56,7 +56,9 @@ const Calendar: React.FC<CalendarProps> = ({ initialDate }) => {
     <div className={style.calendarContainer}>
       <div className={style.layout}>
         {/* left */}
-        <HabitsTool></HabitsTool>
+        <div className={style.leftColumn}>
+          <HabitsTool />
+        </div>
         {/* right */}
         <div className={style.rightColumn}>
           {/* header */}
