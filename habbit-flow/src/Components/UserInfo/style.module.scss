@@ -85,3 +85,53 @@
   color: var(--danger);
   font-weight: 500;
 }
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.userContainer.profileVariant {
+  cursor: default;
+  transition: none;
+  width: 100%;
+
+  .userInfoHeader {
+    gap: 25px;
+    cursor: default;
+  }
+
+  .avatarWrapper {
+    width: 100px;
+    height: 100px;
+    background: var(--card);
+    border: 2px solid var(--border);
+  }
+
+  .initials {
+    font-size: 2rem;
+  }
+
+  .userName {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .userBio {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+  }
+}
+
+.userContainer:not(.profileVariant) {
+  .userBio {
+    display: none;
+  }
+}

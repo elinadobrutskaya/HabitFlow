@@ -6,6 +6,7 @@ import MainPage from './Pages/MainPage'
 import SignIn from './Pages/SignInPage'
 import SignUp from './Pages/SignUpPage'
 import CalendarPage from './Pages/CalendarPage'
+import Profile from './Pages/ProfilePage'
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
           <Route
             path={appRoutes.calendar()}
             element={<CalendarPage></CalendarPage>}
+          ></Route>
+          <Route
+            path={appRoutes.profile()}
+            element={<Profile></Profile>}
           ></Route>
         </Routes>
       </Loyout>

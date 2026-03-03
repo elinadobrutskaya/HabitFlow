@@ -29,7 +29,7 @@ const Header = () => {
         {user ? (
           // if enter
           <>
-            <UserInfo login={user.login} avatarUrl={user.avatar} />
+            <UserInfo variant="header" />
           </>
         ) : (
           //if no enter

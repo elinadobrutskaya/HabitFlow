@@ -3,17 +3,49 @@ import { Link, useNavigate } from 'react-router'
 import style from './style.module.scss'
 
 interface UserInfoProps {
-  login: string
-  avatarUrl?: string
+  variant?: 'header' | 'profile'
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ login, avatarUrl }) => {
+interface UserData {
+  id: string
+  name: string
+  avatar: string
+  bio: string
+}
+
+const UserInfo: React.FC<UserInfoProps> = ({ variant = 'header' }) => {
+  const [user, setUser] = useState<UserData | null>(null)
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
   const navigate = useNavigate()
   const menuRef = useRef<HTMLDivElement>(null)
+  const isProfile = variant === 'profile'
 
-  const getInitials = (name: string) => {
-    return name.slice(0, 2).toUpperCase()
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(
+          'https://6988664c780e8375a68835d8.mockapi.io/habitflow/users',
+        )
+        if (response.ok) {
+          const data = await response.json()
+          if (Array.isArray(data) && data.length > 0) {
+            setUser(data[0])
+          }
+        }
+      } catch (error) {
+        console.error('Ошибка загрузки пользователя:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchUser()
+  }, [])
+
+  const getInitials = (userName: string | undefined) => {
+    if (!userName) return '??'
+    return userName.slice(0, 2).toUpperCase()
   }
 
   const handleLogout = () => {
@@ -23,6 +55,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ login, avatarUrl }) => {
   }
 
   useEffect(() => {
+    if (isProfile) return
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsOpen(false)
@@ -30,32 +63,54 @@ const UserInfo: React.FC<UserInfoProps> = ({ login, avatarUrl }) => {
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+  }, [isProfile])
+
+  if (isLoading) return <div className={style.userContainer}>Loading...</div>
+  const displayName = user?.name || 'Guest'
+  if (!user) return null
 
   return (
-    <div className={style.userContainer} ref={menuRef}>
-      <div className={style.userInfoHeader} onClick={() => setIsOpen(!isOpen)}>
+    <div
+      className={`${style.userContainer} ${isProfile ? style.profileVariant : ''}`}
+      ref={menuRef}
+    >
+      <div
+        className={style.userInfoHeader}
+        onClick={() => !isProfile && setIsOpen(!isOpen)}
+      >
         <div className={style.avatarWrapper}>
-          {avatarUrl ? (
-            <img src={avatarUrl} alt={login} className={style.avatarImage} />
+          {user?.avatar ? (
+            <img
+              src={user.avatar}
+              alt={displayName}
+              className={style.avatarImage}
+            />
           ) : (
-            <div className={style.initials}>{getInitials(login)}</div>
+            <div className={style.initials}>{getInitials(displayName)}</div>
           )}
         </div>
-        <span className={style.userName}>{login} ⌵</span>
+
+        <div className={style.textInfo}>
+          <span className={style.userName}>
+            {displayName} {!isProfile && <span className={style.arrow}>⌵</span>}
+          </span>
+          {isProfile && (
+            <p className={style.userBio}>{user?.bio || 'No description yet'}</p>
+          )}
+        </div>
       </div>
 
-      {isOpen && (
+      {isOpen && !isProfile && (
         <div className={style.dropdown}>
           <Link
-            to="habitflow/profile"
+            to="/habitflow/profile"
             className={style.menuItem}
             onClick={() => setIsOpen(false)}
           >
             Profile
           </Link>
           <Link
-            to="habitflow/calendar"
+            to="/habitflow/calendar"
             className={style.menuItem}
             onClick={() => setIsOpen(false)}
           >

@@ -148,3 +148,36 @@
 .checked {
   background-color: var(--primary);
 }
+
+.calendarContainer.mini {
+  padding: 15px;
+  margin: 0 auto;
+  max-width: 70%;
+  box-shadow: none;
+  border: 1px solid var(--border);
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dayCell {
+    height: 35px;
+  }
+
+  .cellsContainer {
+    height: 25px;
+    margin-bottom: 5px;
+  }
+
+  .checkCell {
+    cursor: default;
+    pointer-events: none;
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .dayOfWeek {
+    font-size: 0.5rem;
+  }
+}

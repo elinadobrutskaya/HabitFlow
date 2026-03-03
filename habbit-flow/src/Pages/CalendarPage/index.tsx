@@ -7,7 +7,7 @@ export default function CalendarPage() {
   return (
     <section className={style.calendar}>
       <div className={style.container}>
-        <Calendar initialDate={today}></Calendar>
+        <Calendar initialDate={today} variant="main"></Calendar>
       </div>
     </section>
   )

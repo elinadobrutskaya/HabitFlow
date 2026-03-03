@@ -7,4 +7,5 @@ export const appRoutes = {
   signUp: () => 'habitflow/sign-up',
   signIn: () => 'habitflow/sign-in',
   calendar: () => 'habitflow/calendar',
+  profile: () => 'habitflow/profile',
 }
