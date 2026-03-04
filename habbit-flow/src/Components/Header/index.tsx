@@ -11,9 +11,16 @@ const Header = () => {
   )
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
+    const checkUser = () => {
+      const savedUser = localStorage.getItem('user')
+      setUser(savedUser ? JSON.parse(savedUser) : null)
+    }
+
+    checkUser()
+
+    window.addEventListener('storage', checkUser)
+    return () => {
+      window.removeEventListener('storage', checkUser)
     }
   }, [])
 
@@ -27,12 +34,8 @@ const Header = () => {
 
       <div className={style.rightPart}>
         {user ? (
-          // if enter
-          <>
-            <UserInfo variant="header" />
-          </>
+          <UserInfo variant="header" />
         ) : (
-          //if no enter
           <>
             <Link to="habitflow/sign-up">
               <Button variant="secondary">Sign UP</Button>

@@ -90,8 +90,9 @@
   justify-content: space-between;
   box-sizing: border-box;
   padding-right: 8px;
-  &:hover {
+  &:not(.profileMode):hover {
     background: var(--primary-contrast);
+
     .deleteBtn {
       opacity: 1;
     }
@@ -101,6 +102,7 @@
 .habitInfo {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .deleteBtn {
@@ -119,4 +121,30 @@
     transform: scale(1.1);
     color: #cf1322;
   }
+}
+
+.profileMode {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); // Разделитель между привычками
+
+  .habitTitle {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.streakInfo {
+  font-size: 13px;
+  margin-left: 10px;
+  color: #888;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.colorIndicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }

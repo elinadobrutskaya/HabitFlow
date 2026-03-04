@@ -6,6 +6,7 @@ import Title from '../../Components/Title'
 import UserInfo from '../../Components/UserInfo'
 import Calendar from '../../Components/Calendar'
 import dayjs from 'dayjs'
+import HabitsTool from '../../Components/HabitsTool'
 
 const Profile: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -16,13 +17,14 @@ const Profile: React.FC = () => {
 
   return (
     <div className={style.profileContainer}>
-      <header className={style.profileHeader}>
+      <div className={style.profileHeader}>
         <div className={style.userInfo}>
           <UserInfo variant="profile"></UserInfo>
         </div>
-      </header>
+      </div>
 
       <section className={style.statsSection}>
+        <HabitsTool variant="profile" />
         <Title size="lg">Your Calendar:</Title>
         <Calendar variant="mini" initialDate={dayjs()}></Calendar>
       </section>

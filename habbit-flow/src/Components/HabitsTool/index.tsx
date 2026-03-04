@@ -12,7 +12,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faFire } from '@fortawesome/free-solid-svg-icons'
 import AllHabitsModal from '../AllHabitsModal'
 
-const HabitsTool = () => {
+interface HabitsToolProps {
+  variant?: 'default' | 'profile'
+}
+
+const HabitsTool: React.FC<HabitsToolProps> = ({ variant = 'default' }) => {
+  const isProfile = variant === 'profile'
   const dispatch = useAppDispatch()
   const habits = useAppSelector((state) => state.habits.items)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,25 +45,27 @@ const HabitsTool = () => {
 
   return (
     <div className={style.leftColumn}>
-      <div className={style.controls}>
-        <div
-          className={style.allHabitsWrapper}
-          onMouseEnter={() => setShowCategories(true)}
-          onMouseLeave={() => setShowCategories(false)}
-        >
-          <button className={style.buttonHabitList}>
-            All Habits<span>⌵</span>
-          </button>
-          {showCategories && <AllHabitsModal categories={categories} />}
-        </div>
+      {!isProfile && (
+        <div className={style.controls}>
+          <div
+            className={style.allHabitsWrapper}
+            onMouseEnter={() => setShowCategories(true)}
+            onMouseLeave={() => setShowCategories(false)}
+          >
+            <button className={style.buttonHabitList}>
+              All Habits<span>⌵</span>
+            </button>
+            {showCategories && <AllHabitsModal categories={categories} />}
+          </div>
 
-        <button
-          className={style.buttonAddHabit}
-          onClick={() => setIsModalOpen(true)}
-        >
-          + Add New Habit
-        </button>
-      </div>
+          <button
+            className={style.buttonAddHabit}
+            onClick={() => setIsModalOpen(true)}
+          >
+            + Add New Habit
+          </button>
+        </div>
+      )}
 
       <HabitModal
         isOpen={isModalOpen}
@@ -71,38 +78,33 @@ const HabitsTool = () => {
           const currentStreak = calculateCurrentStreak(habit.completedDates)
 
           return (
-            <div key={habit.id} className={style.habitItem}>
+            <div
+              key={habit.id}
+              className={`${style.habitItem} ${isProfile ? style.profileMode : ''}`}
+            >
               <div className={style.habitInfo}>
                 <div
                   className={style.colorIndicator}
                   style={{ backgroundColor: habit.color }}
                 />
-                <span className={style.habitTitle}>
-                  {habit.title}
-                  <span
-                    style={{
-                      fontSize: '13px',
-                      marginLeft: '8px',
-                      color: '#888',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                    }}
-                  >
-                    {currentStreak}/{habit.daysStreak}
-                    <FontAwesomeIcon
-                      icon={faFire}
-                      style={{ color: 'var(--primary-bright)' }}
-                    />
-                  </span>
+                <span className={style.habitTitle}>{habit.title}</span>
+                <span className={style.streakInfo}>
+                  {currentStreak}/{habit.daysStreak}
+                  <FontAwesomeIcon
+                    icon={faFire}
+                    style={{ color: 'var(--primary-bright)' }}
+                  />
                 </span>
               </div>
-              <button
-                onClick={() => handleDelete(habit.id)}
-                className={style.deleteBtn}
-              >
-                <FontAwesomeIcon icon={faTrashCan} />
-              </button>
+
+              {!isProfile && (
+                <button
+                  onClick={() => handleDelete(habit.id)}
+                  className={style.deleteBtn}
+                >
+                  <FontAwesomeIcon icon={faTrashCan} />
+                </button>
+              )}
             </div>
           )
         })}

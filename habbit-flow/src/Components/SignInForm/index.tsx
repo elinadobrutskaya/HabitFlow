@@ -5,7 +5,7 @@ import style from './style.module.scss'
 const SignInForm = () => {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [data, setData] = useState({ login: '', password: '' })
-  const [errors, setErrors] = useState<Record<string, string>>({
+  const [errors] = useState<Record<string, string>>({
     login: '',
     password: '',
   })
@@ -32,10 +32,9 @@ const SignInForm = () => {
       )
 
       if (user) {
-        alert(`Hello, ${user.login}!`)
         localStorage.setItem('user', JSON.stringify(user))
-      } else {
-        setErrors({ login: 'Wrong login or password' })
+
+        window.dispatchEvent(new Event('storage'))
       }
     } catch (error) {
       console.error('Enter Error', error)
