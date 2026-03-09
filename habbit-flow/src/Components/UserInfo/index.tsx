@@ -23,23 +23,21 @@ const UserInfo: React.FC<UserInfoProps> = ({ variant = 'header' }) => {
   const isProfile = variant === 'profile'
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUser = () => {
       try {
-        const response = await fetch(
-          'https://6988664c780e8375a68835d8.mockapi.io/habitflow/users',
-        )
-        if (response.ok) {
-          const data = await response.json()
-          if (Array.isArray(data) && data.length > 0) {
-            setUser(data[0])
-          }
+        const savedUser = localStorage.getItem('user')
+
+        if (savedUser) {
+          const userData = JSON.parse(savedUser)
+          setUser(userData)
         }
       } catch (error) {
-        console.error('Ошибка загрузки пользователя:', error)
+        console.error('localStorage Error fetching user:', error)
       } finally {
         setIsLoading(false)
       }
     }
+
     fetchUser()
   }, [])
 
