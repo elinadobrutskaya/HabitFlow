@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import dayjs from 'dayjs'
-// import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface Habit {
   id: string

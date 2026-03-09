@@ -11,6 +11,7 @@ import HabitModal from '../AddHabitModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan, faFire } from '@fortawesome/free-solid-svg-icons'
 import AllHabitsModal from '../AllHabitsModal'
+import DeleteHabitModal from '../DeleteHabitModal'
 
 interface HabitsToolProps {
   variant?: 'default' | 'profile'
@@ -23,6 +24,8 @@ const HabitsTool: React.FC<HabitsToolProps> = ({ variant = 'default' }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showCategories, setShowCategories] = useState(false)
   const categories = Array.from(new Set(habits.map((h) => h.category)))
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
+  const [habitToDelete, setHabitToDelete] = useState<string | null>(null)
 
   useEffect(() => {
     dispatch(fetchHabits())
@@ -37,9 +40,15 @@ const HabitsTool: React.FC<HabitsToolProps> = ({ variant = 'default' }) => {
     dispatch(addHabit(data))
   }
 
-  const handleDelete = (id: string) => {
-    if (window.confirm('Delete this habit?')) {
-      dispatch(deleteHabit(id))
+  const openDeleteModal = (id: string) => {
+    setHabitToDelete(id)
+    setIsDeleteOpen(true)
+  }
+
+  const handleConfirmDelete = () => {
+    if (habitToDelete) {
+      dispatch(deleteHabit(habitToDelete))
+      setHabitToDelete(null)
     }
   }
 
@@ -99,7 +108,7 @@ const HabitsTool: React.FC<HabitsToolProps> = ({ variant = 'default' }) => {
 
               {!isProfile && (
                 <button
-                  onClick={() => handleDelete(habit.id)}
+                  onClick={() => openDeleteModal(habit.id)}
                   className={style.deleteBtn}
                 >
                   <FontAwesomeIcon icon={faTrashCan} />
@@ -109,6 +118,13 @@ const HabitsTool: React.FC<HabitsToolProps> = ({ variant = 'default' }) => {
           )
         })}
       </div>
+      <DeleteHabitModal
+        isOpen={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+        onConfirm={handleConfirmDelete}
+        title="Delete Habit"
+        message="Are you sure you want to delete this habit? This action cannot be undone."
+      />
     </div>
   )
 }
